@@ -12,6 +12,7 @@ TTS is a two-step process - first you generate a MEL spectrogram using a TTS mod
 - TTS:
     - [x] [Tacotron2](https://github.com/NVIDIA/tacotron2)
     - [x] [Fastspeech2](https://arxiv.org/abs/2006.04558)
+    - [x] [Forward Tacotron](https://github.com/as-ideas/ForwardTacotron)
     - [ ] [Glow TTS](https://arxiv.org/abs/2005.11129)*
     - [ ] [Transformer TTS](https://arxiv.org/abs/1809.08895)
 - VOCODER:
@@ -24,6 +25,8 @@ In the future, we may add more models.
 
 <small> *Currently, conversion of the Glow TTS model is unavailable (refer to the issue [here](https://github.com/pytorch/pytorch/issues/50009)). </small>
 
+Currently, **Forward Tacotron** only supports ONNX Conversion. There is a problem while converting to TensorFlow Graph Format. (Refer to this [issue](https://github.com/onnx/onnx-tensorflow/issues/853) for more details).
+
 **Notes:**
 
 - Training data used for HiFi-GAN (MEL spectogram generation) is different w.r.t other models like Tacotron2, FastSpech2. So it is not compatible with the other architectures available inside this repo.
@@ -34,6 +37,7 @@ In the future, we may add more models.
 - `MelGAN_TFLite.ipynb`: Shows the model conversion process of MelGAN. 
 - `Parallel_WaveGAN_TFLite.ipynb`: Shows the model conversion process of Parallel WaveGAN. 
 - `HiFi-GAN.ipynb`: Shows the model conversion process of HiFi-GAN.
+- `Forward_Tacotron_PyTorch_TFLite.ipynb` : Converts Forward Tacotron model to ONNX. In future it will be updated to support TFLite conversion.
 
 Model conversion processes for Tacotron2, Fastspeech2, and Multi-Band MelGAN are available via the following notebooks:
 
@@ -60,6 +64,9 @@ After converting to TFLite, we used the [Benchmark tool](https://www.tensorflow.
 - All the models above support dynamic shaped inputs. However, benchmarking dynamic input size MelGAN models is not currently supported. So to benchmark those models we used inputs of shape (100, 80).
 - Similary for Fastspeech2 benchmarking dynamic input size model is erroring out. So to benchmark we used inputs of shape (1, 50) where 50 represents number of tokens. [This issue thread](https://github.com/tensorflow/tensorflow/issues/45986) provides more details. 
 
+## 🔈 Audio Samples
+
+All combination of samples are available in `audio_samples` folder. To listen directly without downloading refer to this [Sound Cloud](https://soundcloud.com/tulasi-ram-887761209) folder.
 
 ## References
 - [Dynamic-range quantization in TensorFlow Lite](https://www.tensorflow.org/lite/performance/post_training_quant)
